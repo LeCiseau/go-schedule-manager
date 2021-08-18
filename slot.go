@@ -1,8 +1,13 @@
-package go-schedule-manager
+package manager
 
 import (
 	"time"
 )
+
+type PartnerRef struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
 
 type Slot struct {
 	Id            int        `json:"id"`
@@ -153,17 +158,17 @@ func CleanSlots(rawSlots Slots, unavailabilities Unavailabilities) ([]Slot, erro
 	return slots, nil
 }
 
-func (slot Slot) toUnavailability() Unavailability {
+func (slot Slot) ToUnavailability() Unavailability {
 	return Unavailability{
 		Range:         slot.Range,
 		HairdresserId: slot.HairdresserId,
 	}
 }
 
-func (slots Slots) toUnavailabilities() Unavailabilities {
+func (slots Slots) ToUnavailabilities() Unavailabilities {
 	var unavailabilities Unavailabilities
 	for _, slot := range slots {
-		unavailabilities = append(unavailabilities, slot.toUnavailability())
+		unavailabilities = append(unavailabilities, slot.ToUnavailability())
 	}
 	return unavailabilities
 }

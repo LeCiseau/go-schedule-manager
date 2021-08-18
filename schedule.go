@@ -1,4 +1,4 @@
-package go-schedule-manager
+package manager
 
 import (
 	"time"
@@ -33,7 +33,7 @@ func MergeSlotsAndSchedules(slots Slots, schedules Schedules) (Slots, error) {
 	if len(schedules) == 0 {
 		return slots, nil
 	}
-	tmpUnavailabilities := slots.toUnavailabilities()
+	tmpUnavailabilities := slots.ToUnavailabilities()
 	tmpSlots := schedules.toSlots()
 	schedulesWithoutSlots, errClean := CleanSlots(tmpSlots, tmpUnavailabilities)
 	if errClean != nil {
